@@ -4,4 +4,12 @@
 
 {% block content %}
     <h1>Clientes</h1>
+    {% for cliente in clientes %}    
+        <p>{{ cliente.nro_cuenta }}</p>
+        <p>{{ cliente.nombre_completo }}</p>
+        <p>{{ cliente.dni }}</p>
+        <p>{{ cliente.email }}</p>
+        <p>{{ cliente.telefono }}</p>
+        <p>{{ cliente.direccion }}</p>
+    {% endfor %}
 {% endblock %}
