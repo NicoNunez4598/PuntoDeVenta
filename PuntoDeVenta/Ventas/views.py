@@ -31,6 +31,15 @@ def add_cliente_view(request):
     return redirect('Clientes')
 
 def edit_cliente_view(request):
+    if request.POST:
+        cliente = Cliente.objects.get(id=request.POST.get('id_personal_editar'))
+        form_editar = EditClienteForm(request.POST, request.FILES, instance=cliente)
+        if form_editar.is_valid():
+            try:
+                form_editar.save()
+            except:
+                messages.error(request, 'Error al editar el cliente')
+                return redirect('Clientes')
     return redirect('Clientes')
 
 def delete_cliente_view(request):

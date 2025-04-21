@@ -18,7 +18,7 @@ class AddClienteForm(forms.ModelForm):
 class EditClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
-        fields = ('nombre_completo', 'dni', 'email', 'telefono', 'direccion', 'impositivo')
+        fields = ('id','nombre_completo', 'dni', 'email', 'telefono', 'direccion', 'impositivo')
         labels = {
             'nombre_completo': 'Nombre completo: ',
             'dni': 'DNI: ',

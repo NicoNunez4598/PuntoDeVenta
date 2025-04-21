@@ -94,7 +94,8 @@ function eliminarProducto(id) {
   document.getElementById("id_producto_eliminar").value = id;
 }
 
-function editarPersonal(nombre_completo, dni, email, telefono, direccion, impositivo) {
+function editarPersonal(id, nombre_completo, dni, email, telefono, direccion, impositivo) {
+  document.getElementById("id_personal_editar").value = id;
   document.getElementById("nombre_completo_editar").value = nombre_completo;
   document.getElementById("dni_editar").value = dni;
   document.getElementById("email_editar").value = email;
