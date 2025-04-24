@@ -47,3 +47,21 @@ def delete_cliente_view(request):
         cliente = Cliente.objects.get(id=request.POST.get('id_personal_eliminar'))
         cliente.delete()
     return redirect('Clientes')
+
+def productos_view(request):
+    
+    context = {
+        
+    }
+    return render(request, 'productos.html', context)
+
+def add_producto_view(request):
+    if request.POST:
+        form_personal = AddClienteForm(request.POST, request.FILES)
+        if form_personal.is_valid():
+            try:
+                form_personal.save()
+            except:
+                messages.error(request, 'Error al agregar el producto')
+                return redirect('Productos')
+    return redirect('Productos')

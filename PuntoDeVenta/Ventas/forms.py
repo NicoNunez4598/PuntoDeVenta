@@ -35,3 +35,16 @@ class EditClienteForm(forms.ModelForm):
             'direccion': forms.TextInput(attrs={'type': 'text', 'id': 'direccion_editar'}),
             'impositivo': forms.TextInput(attrs={'id': 'impositivo_editar'}),
         }
+
+class AddProductoForm(forms.ModelForm):
+    class Meta:
+        model = Producto
+        fields = ('id', 'descripcion', 'imagen', 'precio', 'cantidad', 'iva')
+        labels = {
+            'id': 'ID: ',
+            'descripcion': 'Descripción: ',
+            'imagen': 'Imagen: ',
+            'precio': 'Precio: ',
+            'cantidad': 'Cantidad: ',
+            'iva': 'IVA: ',
+        }
