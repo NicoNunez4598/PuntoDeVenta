@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Cliente, Producto
-from .forms import AddClienteForm, EditClienteForm
+from .forms import AddClienteForm, EditClienteForm, AddProductoForm, EditProductoForm
 from django.contrib import messages
 
 # Create your views here.
@@ -49,19 +49,39 @@ def delete_cliente_view(request):
     return redirect('Clientes')
 
 def productos_view(request):
-    
+    productos = Producto.objects.all()
+    form_add = AddProductoForm()
     context = {
-        
+        'productos': productos,
+        'form_add': form_add
     }
     return render(request, 'productos.html', context)
 
 def add_producto_view(request):
     if request.POST:
-        form_personal = AddClienteForm(request.POST, request.FILES)
+        form_personal = AddProductoForm(request.POST, request.FILES)
         if form_personal.is_valid():
             try:
                 form_personal.save()
             except:
                 messages.error(request, 'Error al agregar el producto')
                 return redirect('Productos')
+    return redirect('Productos')
+
+def edit_producto_view(request):
+    if request.POST:
+        producto = Producto.objects.get(id=request.POST.get('id_producto_editar'))
+        form_editar = EditProductoForm(request.POST, request.FILES, instance=producto)
+        if form_editar.is_valid():
+            try:
+                form_editar.save()
+            except:
+                messages.error(request, 'Error al editar el producto')
+                return redirect('Productos')
+    return redirect('Productos')
+
+def delete_producto_view(request):
+    if request.POST:
+        producto = Producto.objects.get(id=request.POST.get('id_producto_eliminar'))
+        producto.delete()
     return redirect('Productos')

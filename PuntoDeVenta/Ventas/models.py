@@ -26,7 +26,7 @@ class Producto(models.Model):
     imagen = models.ImageField(upload_to='productos/', null=False, blank=False)
     precio = models.DecimalField(max_digits=13, decimal_places=2, null=False, blank=False)
     cantidad = models.DecimalField(max_digits=13, decimal_places=2, null=False, blank=False)
-    iva = models.DecimalField(max_digits=13, decimal_places=2, null=False, blank=False, choices=((0.21, '21%'), (0.105, '10.5%'), (0.27, '27%'), (0.025, '2.5%'), (0.0, '0%')))
+    iva = models.DecimalField(max_digits=13, decimal_places=4, null=False, blank=False, choices=((0.21, '21%'), (0.105, '10.5%'), (0.27, '27%'), (0.025, '2.5%'), (0.0, '0%')))
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

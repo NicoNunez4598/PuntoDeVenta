@@ -104,6 +104,15 @@ function editarPersonal(id, nombre_completo, dni, email, telefono, direccion, im
   document.getElementById("impositivo_editar").value = impositivo;
 }
 
+function editarProducto(id, descripcion, imagen, precio, cantidad, iva) {
+  document.getElementById("id_producto_editar").value = id;
+  document.getElementById("descripcion_editar").value = descripcion;
+  document.getElementById("imagen_editar").value = imagen;
+  document.getElementById("precio_editar").value = precio;
+  document.getElementById("cantidad_editar").value = cantidad;
+  document.getElementById("iva_editar").value = iva;
+}
+
 function eliminarPersonal(id) {
   document.getElementById("id_personal_eliminar").value = id;
 }
