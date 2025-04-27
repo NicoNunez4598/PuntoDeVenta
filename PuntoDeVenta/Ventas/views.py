@@ -1,7 +1,15 @@
 from django.shortcuts import render, redirect
-from .models import Cliente, Producto
+from .models import Cliente, Producto, Egreso, ProductosEgreso
 from .forms import AddClienteForm, EditClienteForm, AddProductoForm, EditProductoForm
 from django.contrib import messages
+from django.views.generic import ListView
+from django.http import JsonResponse, HttpResponse
+from weasyprint.text.fonts import FontConfiguration
+from django.template.loader import get_template
+from weasyprint import HTML, CSS
+from django.conf import settings
+import os
+
 
 # Create your views here.
 
