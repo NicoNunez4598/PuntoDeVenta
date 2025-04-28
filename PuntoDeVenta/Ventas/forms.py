@@ -54,7 +54,6 @@ class EditProductoForm(forms.ModelForm):
         model = Producto
         fields = ('id', 'descripcion', 'imagen', 'precio', 'cantidad', 'iva')
         labels = {
-            'id': 'ID: ',
             'descripcion': 'Descripción: ',
             'imagen': 'Imagen: ',
             'precio': 'Precio: ',
@@ -62,9 +61,9 @@ class EditProductoForm(forms.ModelForm):
             'iva': 'IVA: ',
         }
         widgets = {
-            'descripcion': forms.TextInput(attrs={'type': 'text', 'id': 'descripcion'}),
-            'imagen': forms.FileInput(attrs={'type': 'file', 'id': 'imagen'}),
-            'precio': forms.TextInput(attrs={'type': 'text', 'id': 'precio'}),
-            'cantidad': forms.TextInput(attrs={'type': 'text', 'id': 'cantidad'}),
-            'iva': forms.TextInput(attrs={'type': 'text', 'id': 'iva'}),
+            'descripcion': forms.TextInput(attrs={'type': 'text', 'id': 'descripcion_editar'}),
+            'imagen': forms.FileInput(attrs={'type': 'file', 'id': 'imagen_editar'}),
+            'precio': forms.TextInput(attrs={'id': 'precio_editar'}),
+            'cantidad': forms.TextInput(attrs={'id': 'cantidad_editar'}),
+            'iva': forms.TextInput(attrs={'id': 'iva_editar'}),
         }
