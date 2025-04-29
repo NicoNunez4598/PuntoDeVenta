@@ -69,10 +69,10 @@
                         {% for i in clientes_lista %}
                         <tr>
                             <td>{{i.id}}</td>
-                            <td>{{i.nombre}}</td>
+                            <td>{{i.nombre_completo}}</td>
                             <td>{{i.telefono}}</td>
                             <td>
-                                <button onclick="seleccionarCliente('{{i.id}}', '{{i.nombre}}')" class="btn btn-success"
+                                <button onclick="seleccionarCliente('{{i.id}}', '{{i.nombre_completo}}')" class="btn btn-success"
                                     data-dismiss="modal" type="button">
                                     <i class="fas fa-share-square"></i>
                                 </button>
@@ -149,6 +149,7 @@
             <select required name="impresion" class="form-control border border-dark bg-secondary text-white"
                 id="impresion">
                 <option value="1" selected>Ticket</option>
+                <option value="2">Factura</option>
             </select>
         </div>
     </div>
@@ -373,6 +374,22 @@
 
     // Gudardar datos
     function saveData() {
+        if (document.getElementById("fecha").value == "") {
+            Swal.fire({
+                icon: 'error',
+                title: '',
+                text: "Fecha no puede estar vacía",
+            });
+            return
+        }
+        if (document.getElementById("cliente").value == "") {
+            Swal.fire({
+                icon: 'error',
+                title: '',
+                text: "Cliente no puede estar vacío",
+            });
+            return
+        }
         if (parseFloat(verts.items.total) == 0) {
             Swal.fire({
                 icon: 'error',

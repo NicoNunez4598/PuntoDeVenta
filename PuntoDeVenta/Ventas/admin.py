@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Ventas.models import Cliente, Producto
+from Ventas.models import Cliente, Producto, Empresa
 
 # Register your models here.
 
@@ -13,5 +13,11 @@ class ProductoAdmin(admin.ModelAdmin):
     search_fields = ('id', 'descripcion', 'imagen', 'precio', 'cantidad', 'iva')
     list_filter = ('created', 'updated')
 
+class EmpresaAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'cuit', 'direccion', 'telefono', 'email', 'created', 'updated')
+    search_fields = ('nombre', 'cuit', 'direccion', 'telefono', 'email')
+    list_filter = ('created', 'updated')
+
 admin.site.register(Cliente, ClienteAdmin)
 admin.site.register(Producto, ProductoAdmin)
+admin.site.register(Empresa, EmpresaAdmin)

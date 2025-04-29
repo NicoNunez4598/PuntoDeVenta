@@ -82,3 +82,19 @@ class ProductosEgreso(models.Model):
     def toJSON(self):
         item = model_to_dict(self, exclude=['created'])
         return item
+
+class Empresa(models.Model):
+    nombre = models.CharField(max_length=200, null=False, blank=False)
+    cuit = models.IntegerField(null=False, blank=False)
+    direccion = models.CharField(max_length=200, null=False, blank=False)
+    telefono = models.CharField(max_length=200, null=False, blank=False)
+    email = models.EmailField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Empresa"
+        verbose_name_plural = "Empresas"
+    
+    def __str__(self):
+        return self.nombre

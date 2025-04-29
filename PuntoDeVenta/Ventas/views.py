@@ -9,12 +9,19 @@ from django.template.loader import get_template
 from weasyprint import HTML, CSS
 from django.conf import settings
 import os
+import json
 
 
 # Create your views here.
 
 def ventas_view(request):
-    return render(request, 'ventas.html')
+    ventas = Egreso.objects.all()
+    num_ventas = len(ventas)
+    context = {
+        'Ventas': ventas,
+        'num_ventas': num_ventas
+    }
+    return render(request, 'ventas.html', context)
 
 def clientes_view(request):
     clientes = Cliente.objects.all()
@@ -118,12 +125,38 @@ class add_ventas(ListView):
                     item = i.toJSON()
                     item['value'] = i.descripcion
                     data.append(item)
+            elif action == 'save':
+                total_pagado = float(request.POST['efectivo']) + float(request.POST['tarjeta']) + float(request.POST['transferencia']) + float(request.POST['vales']) + float(request.POST['otro'])
+                fecha = request.POST['fecha']
+                id_cliente = int(request.POST['id_cliente'])
+                cliente = Cliente.objects.get(id=id_cliente)
+                datos = json.loads(request.POST['verts'])
+                total_venta = float(datos['total'])
+                ticket_num = int(request.POST['ticket'])
+                if ticket_num == 1:
+                    ticket = True
+                else:
+                    ticket = False
+                desglosar_iva_num = int(request.POST['desglosar'])
+                if desglosar_iva_num == 0:
+                    desglosar_iva = False
+                elif desglosar_iva_num == 1:
+                    desglosar_iva = True
+                comentarios = request.POST['comentarios']
+                new_venta = Egreso(fecha_pedido=fecha, cliente=cliente, total=total_venta, pagado=total_pagado, comentarios=comentarios, ticket=ticket, desglosar=desglosar_iva)
+                new_venta.save()
             else:
                 data['error'] = "Ha ocurrido un error"
         except Exception as e:
             data['error'] = str(e)
 
         return JsonResponse(data,safe=False)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['productos_lista'] = Producto.objects.all()
+        context['clientes_lista'] = Cliente.objects.all()
+        
+        return context
 
 
 def export_pdf_view(request, id, iva):
